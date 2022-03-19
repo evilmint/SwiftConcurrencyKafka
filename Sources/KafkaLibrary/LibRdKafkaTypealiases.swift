@@ -1,0 +1,5 @@
+import librdkafka
+
+typealias LibRdKafkaPartitonList = UnsafeMutablePointer<rd_kafka_topic_partition_list_t>
+typealias LibRdKafkaMessage = UnsafeMutablePointer<rd_kafka_message_t>
+typealias LibRdKafkaError = rd_kafka_resp_err_t
