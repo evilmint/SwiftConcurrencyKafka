@@ -27,25 +27,25 @@ do {
             print("Caught error \(error)")
         }
     }
-//
-//    let client = try KafkaProducer(configuration: config)
-//    let testTopic = KafkaTopic(name: "test")
-//
-//    Task.detached {
-//        for i in 0..<10 {
-//            do {
-//                let geoffreyCat = Cat(name: "Geoffrey \(i)")
-//                try await client.produce(in: testTopic, geoffreyCat)
-//            } catch {
-//                print("Caught error \(error)")
-//            }
-//            do {
-//                try await Task.sleep(nanoseconds: 2_000_000_000)
-//            } catch {
-//                print("Sleeping failed \(error)")
-//            }
-//        }
-//    }
+
+    let client = try KafkaProducer(configuration: config)
+    let testTopic = KafkaTopic(name: "test")
+
+    Task.detached {
+        for i in 0..<10 {
+            do {
+                let geoffreyCat = Cat(name: "Geoffrey \(i)")
+                try await client.produce(in: testTopic, geoffreyCat)
+            } catch {
+                print("Caught error \(error)")
+            }
+            do {
+                try await Task.sleep(nanoseconds: 2_000_000_000)
+            } catch {
+                print("Sleeping failed \(error)")
+            }
+        }
+    }
 
     RunLoop.current.run()
 } catch {
