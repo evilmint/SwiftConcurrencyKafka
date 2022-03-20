@@ -1,9 +1,9 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.4
 import PackageDescription
 
 let package = Package(
     name: "Kafka",
-    platforms: [.macOS(.v12)],
+    platforms: [.macOS(.v10_15)],
     products: [
         .library(name: "KafkaLibrary", targets: ["KafkaLibrary"]),
     ],
@@ -11,7 +11,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "Kafka",
+            name: "KafkaExample",
             dependencies: ["KafkaLibrary"]
         ),
         .target(name: "KafkaLibrary", dependencies: ["librdkafka"]),

@@ -11,7 +11,7 @@ public final class KafkaConsumer {
         let config = KafkaConfiguration()
 
         for (key, value) in configuration {
-            try config.setConfig(key: key, value: value)
+            try config.setProperty(key: key, value: value)
         }
 
         kafkaClient = LibRdKafkaClient(kafkaHandle: try KafkaHandle(from: config, type: .consumer))

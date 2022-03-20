@@ -37,10 +37,11 @@ Supports Producers and Consumers.
     let testTopic = KafkaTopic(name: "test")
 
     Task.detached {
-        for i in 0..<10 {
+        for i in 0 ..< 10 {
             do {
                 let geoffreyCat = Cat(name: "Geoffrey \(i)")
-                try await client.produce(in: testTopic, geoffreyCat)
+                let result = try await client.produce(in: testTopic, geoffreyCat)
+                print(result.message)
             } catch {
                 print("Caught error \(error)")
             }

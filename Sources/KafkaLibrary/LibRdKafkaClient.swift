@@ -9,14 +9,19 @@ final class LibRdKafkaClient {
     }
 
     func poll() {
-        rd_kafka_poll(kafkaHandle.handle, 0)
+        rd_kafka_poll(kafkaHandle.handle, 1000)
     }
 
     func flush(timeout: Int) {
         rd_kafka_flush(kafkaHandle.handle, Int32(timeout))
     }
 
-    func produce(in topic: Topic, payload: UnsafeMutableRawPointer, payloadLength: Int) throws {
+    func produce(
+        in topic: Topic,
+        payload: UnsafeMutableRawPointer,
+        payloadLength: Int,
+        messageOpaque: UnsafeMutableRawPointer? = nil
+    ) throws {
         let returnCode = rd_kafka_produce(
             topic.handle,
             RD_KAFKA_PARTITION_UA,
@@ -25,7 +30,7 @@ final class LibRdKafkaClient {
             payloadLength,
             nil,
             0,
-            nil
+            messageOpaque
         )
 
         if returnCode != 0 {
